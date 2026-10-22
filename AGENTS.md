@@ -31,7 +31,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 - Never hardcode user-facing text. A literal in `Error(`, `Message(` or `Confirm(` is blocked.
 - Never edit files outside `app/`, `test/` and the feature's spec in `specs/` for an AL task.
 - Never rewrite git history: no force push, no rebase or reset of commits others may have.
-- Never report done without a green build.
+- Never report done without a green build. "Done" is `DEFINITION-OF-DONE.md`, checked by `/done`.
 
 ## Skills (loaded on demand)
 
@@ -40,6 +40,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 | a new object, field or enum value; deleting one you reserved | `al-object-id-assignment` |
 | after changing any `.al` file or `app.json`; before saying done | `al-build-validation` |
 | a "how should I" question about AL/BC; checking an event, property or pattern | `al-knowledge` |
+| "is it done?", before review or a PR | `definition-of-done` |
 
 ## Agents and commands
 
@@ -47,5 +48,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 |------|-----|
 | spec a feature | `/spec <task>` - the `al-spec` agent, interactive, in your own session |
 | implement an approved spec | "implement the spec" - the `al-coder` agent, as a subagent (no command) |
+| check it is done | `/done` - every DoD line with evidence, then DONE or NOT DONE |
+| review it | the `al-reviewer` agent - read-only, findings first, applies BCQuality |
 | build and fix until green, without filling this conversation with diagnostics | the `al-build-fixer` agent (subagent) |
 | a simple BC/AL knowledge question (pattern, event, property) | the `al-lookup` agent (subagent on the cheaper haiku model; pass the developer's question as asked) |
