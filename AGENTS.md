@@ -46,5 +46,6 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 | Step | How |
 |------|-----|
 | spec a feature | `/spec <task>` - the `al-spec` agent, interactive, in your own session |
+| implement an approved spec | "implement the spec" - the `al-coder` agent, as a subagent (no command) |
 | build and fix until green, without filling this conversation with diagnostics | the `al-build-fixer` agent (subagent) |
 | a simple BC/AL knowledge question (pattern, event, property) | the `al-lookup` agent (subagent on the cheaper haiku model; pass the developer's question as asked) |
