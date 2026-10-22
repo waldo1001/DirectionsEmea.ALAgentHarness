@@ -5,5 +5,6 @@ permissionset 50100 "DIR Directions Demo"
     Permissions =
         tabledata "DIR Carrier" = RIMD,
         table "DIR Carrier" = X,
-        page "DIR Carriers" = X;
+        page "DIR Carriers" = X,
+        codeunit "DIR Sales Release Check" = X;
 }
