@@ -15,7 +15,8 @@
       "Bash(rm -rf:*)",
       "Bash(rm -fr:*)",
       "Edit(.alpackages/**)",
-      "Write(.alpackages/**)"
+      "Write(.alpackages/**)",
+      "mcp__al__al_getnextobjectid"
     ]
   },
   "hooks": {

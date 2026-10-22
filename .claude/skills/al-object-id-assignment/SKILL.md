@@ -1,35 +1,27 @@
 ---
 name: al-object-id-assignment
-description: 'Get the ID for a new AL object from the AL extension''s own tool (al_getnextobjectid) BEFORE writing the artifact. Use when: creating any new AL object (table, tableextension, page, pageextension, codeunit, report, enum, enumextension, query, xmlport, permissionset, ...), adding a field through a tableextension, or adding an enum value through an enumextension. Never pick an ID yourself.'
+description: 'Reserve object, field and enum-value IDs with AL Object ID Ninja BEFORE writing the AL artifact, and release IDs that end up unused. Use when: creating any new AL object (table, tableextension, page, pageextension, codeunit, report, enum, enumextension, query, xmlport, permissionset, ...), adding a field through a tableextension, adding an enum value through an enumextension, or deleting/reverting an object whose ID you reserved. Never pick an ID yourself.'
 ---
 
-# AL Object ID Assignment (AL extension tool)
+# AL Object ID Assignment (AL Object ID Ninja)
 
-Every new object gets its ID **from a tool, before the artifact is written**. An ID the
-model picks itself is a guess: it collides with what is already in the app, and you only
-find out at compile or publish time.
+Every object, field and enum-value ID is **reserved from AL Object ID Ninja before the
+artifact is written**. Ninja owns the ranges across every developer and branch. An ID you
+pick yourself is not reserved: a colleague's next reservation collides with it, and you only
+find out at publish time, in someone else's branch.
 
-Guessed, hardcoded, incremented and counted-from-existing-files IDs are **forbidden**. A
-tool in your list is not optional: it removes every excuse for inventing one.
+Guessed, hardcoded, incremented, counted-from-existing-files and `idRanges`-derived IDs are
+**forbidden**. A tool in your list is not optional: it removes every excuse for inventing one.
 
-## Limitation - read this first
-
-`al_getnextobjectid` **only sees your local repo**. It scans the AL files of the project on
-disk and returns the lowest number that is free *there*. It reserves nothing: two calls
-without writing a file return the same ID, and so do two developers on two branches.
-Both write `table 50101`, both builds are green, and the collision shows up at merge or
-publish time, in someone else's branch.
-
-It also has no answer for **fields and enum values**: it allocates object IDs only.
-
-This is fine for one developer on one branch. It is not fine for a team. The fix is a
-reservation service (step 03), not a better guess.
+Why Ninja and not `al_getnextobjectid`: that tool only sees your local repo and reserves
+nothing, so two developers get the same "next free" ID. Ninja is a shared reservation
+service. The MCP server is only the data source; this skill is how to use it.
 
 ## When to use
 
 - Before creating any new AL object.
-- Before adding a field through a tableextension, or a value through an enumextension
-  (see step 3: the tool can not do these).
+- Before adding a field through a tableextension, or a value through an enumextension.
+- After deleting, renaming away or reverting an object whose ID you reserved (release it).
 
 Not needed when you edit the body of an existing object: it keeps its ID.
 
@@ -38,72 +30,94 @@ Not needed when you edit the body of an existing object: it keeps its ID.
 ### 1. List every artifact that needs an ID
 
 Objects, fields added through a tableextension, values added through an enumextension. Fields of a
-**new** table are numbered 1, 2, 3 ... and need no ID from a tool: a field ID only has to be unique
+**new** table are numbered 1, 2, 3 ... and are **not** reserved: a field ID only has to be unique
 within its own table. Per app: `app/` and `test/` have their own ranges, so
-an ID is asked for the app that will own the object.
+an ID is reserved against the app that will own the object.
 
-### 2. Find the tool
+### 2. Find the Ninja tool
 
 Use what the session exposes; list your tools, do not assume a name.
 
-| Host | Tool |
-|------|------|
-| GitHub Copilot in VS Code | `al_getnextobjectid`, built into the AL extension (no MCP needed) |
-| Claude Code | the same `al_getnextobjectid`, through the AL CLI's MCP server `al` in `.mcp.json` (`al launchmcpserver`) |
+| Host | Reserve | Release |
+|------|---------|---------|
+| Claude Code, Cursor, any MCP client (`.mcp.json` server `al-object-id-ninja`) | `ninja_assignObjectId` | `ninja_unassignObjectId` |
+| GitHub Copilot in VS Code (Ninja extension, no MCP needed) | `ninjaNextId` | `ninjaUnassignId` |
 
-No tool present? Go to the hard stop below.
+No Ninja tool present? Go to the hard stop below. `al_getnextobjectid` (AL extension / AL MCP
+server) is **not** a fallback: it reads your local workspace and reserves nothing, so it is
+denied in `.claude/settings.json`.
 
-### 3. Ask once per object type
+### 3. Reserve one ID per artifact
 
-Call the tool with:
+Call the reserve tool once per artifact with:
 
-- `objectType` - `Table`, `TableExtension`, `Page`, `PageExtension`, `Codeunit`, `Enum`, ...
-- `projectPath` - the owning app folder (`app` or `test`), required because both are loaded.
-- `count` - the number of objects of that type you are about to create in this turn. Never
-  call twice for the same type without writing the first file: you get the same ID back.
+- `objectType` - the object type in lower case (`table`, `tableextension`, `codeunit`, ...).
+  For a **field**, `table_<tableId>` of the table that gets the field: a field added to
+  `Table 18 "Customer"` through a tableextension is `table_18`. For an **enum value**,
+  `enum_<enumId>`.
+- `targetFilePath` - the absolute path of the owning app's `app.json` (`app/app.json` or
+  `test/app.json`). Ninja only uses it to find the app; it says nothing about the object, so
+  the file you are about to create does not need to exist. Say so when you call it.
 
-Read the tool's input schema at call time; do not guess parameter names. Show the tool's
-`warnings` to the developer.
+Never reuse one returned ID for a second artifact and never increment a returned ID: the
+next number was never reserved. Read the tool's input schema at call time; do not guess
+parameter names.
 
-**Fields of a new table:** number them 1, 2, 3 ... - no tool needed. **Tableextension fields and
-enumextension values:** the tool returns nothing for these. Do not count up from existing fields.
-Ask the developer for the ID, or stop.
+### 4. Check the ID is really free locally
 
-### 4. Write the artifact with the returned ID
+Search the owning app for the returned ID on the same object type (for example
+`grep -rniE "^\s*table\s+50101\b" app/`). If it is already declared, Ninja has not been
+synchronized with this app: **hard stop** (below). Do not ask for "the next one".
+
+### 5. Write the artifact with the returned ID
 
 The ID goes verbatim into the declaration: `tableextension 50101 "DIR Customer"`. Name the
 file per CodeCop AA0215, `<ObjectName>.<ObjectType>.al` without spaces
 (`DIRCustomer.TableExt.al`). No placeholder IDs, no `50000` "to be fixed later": a filler
 that survives one build survives to production.
 
-### 5. Report
+### 6. Release what you do not use
+
+Object dropped from the design, deleted, reverted, a stub removed: call the release tool for
+its ID. An unreleased ID stays consumed for everyone.
+
+### 7. Report
 
 ```
-Object ID assignment (al_getnextobjectid - local repo only, not reserved)
-  TableExtension "DIR Customer"              -> 50101  (app)
-  Codeunit       "DIR Carrier Release Check" -> 50102  (app)
-  field          "DIR Preferred Carrier"     -> asked the developer: 50100
+Object ID reservation
+  Table      "DIR Carrier Rating"              -> 50102  (app)
+  field      "DIR Preferred Carrier" (Table 18) -> 50100  (app, table_18)
+  Codeunit   "DIR Carrier Release Check"       -> 50103  (app)
+  Codeunit   "DIR Carrier Tests"               -> 80100  (test)
+  Released:  50104 (codeunit dropped from the design)
 ```
 
-Always print "local repo only, not reserved": the developer must know a colleague can get
-the same number.
+When a spec is in play, copy this list into the spec's `## Reserved IDs` table: that table
+is what `/done` checks the code against.
 
 ## Hard stop - no fallback
 
-> ⛔ No ID tool available, or the call errors: **STOP and report it.** Do not fall back to
-> `idRanges`, to the highest existing ID, or to "a safe-looking number". Unblock with:
+> ⛔ No Ninja tool available, the call errors, or the returned ID is already declared in the
+> app: **STOP and report it.** Do not fall back to `idRanges`, to the highest existing ID,
+> or to "a safe-looking number". Tell the user how to unblock and wait:
 >
-> - VS Code / Copilot: install or enable the AL Language extension (`ms-dynamics-smb.al`).
-> - Claude Code: install the AL CLI
->   (`dotnet tool install --global microsoft.dynamics.businesscentral.development.tools --prerelease`)
->   and approve the `al` server from `.mcp.json` (`/mcp`).
+> - Claude Code: approve the `al-object-id-ninja` server from `.mcp.json` (`/mcp`), or
+>   `claude mcp add --scope project al-object-id-ninja -- npx -y @vjeko.com/al-object-id-ninja-mcp`
+> - VS Code: install the extension `vjeko.vjeko-al-objid`.
+> - ID already declared: run **Ninja: Synchronize Object IDs** in VS Code, then retry.
+
+A blocked reservation costs one message. An invented ID costs a collision in someone else's
+branch.
 
 ## Never
 
-- Never write a concrete ID that did not come from the tool or the developer.
-- Never treat a green build as proof the ID is free for the team: the collision is with a
-  colleague's branch, not with your workspace.
+- Never write a concrete ID into a spec. Specs say `<Ninja>`; a guessed ID in a spec becomes
+  a guessed ID in the code.
+- Never treat a green build as proof the ID was free: the collision is with a reservation,
+  not with your workspace.
 
 ## Related
 
-- `.mcp.json` - registers the AL CLI's MCP server for Claude Code.
+- `al-build-validation` - run after the artifact is written.
+- `.mcp.json` - registers the Ninja MCP server for Claude Code.
+- `specs/TEMPLATE.md` - the `## Reserved IDs` table this skill fills (step 06).

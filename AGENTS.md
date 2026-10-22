@@ -13,7 +13,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 ## Look it up, never assume
 
 - **Affix:** `mandatoryAffixes` in `app/AppSourceCop.json`. Every new object name carries it.
-- **Object IDs:** from the `al-object-id-assignment` skill, never picked. Do not read `idRanges`.
+- **Object IDs:** reserved with AL Object ID Ninja, never picked. Do not read `idRanges`.
 - **BC version:** `application` and `runtime` in `app/app.json`.
 
 ## How we write AL
@@ -36,4 +36,4 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 
 | When | Skill |
 |------|-------|
-| a new object, field or enum value | `al-object-id-assignment` |
+| a new object, field or enum value; deleting one you reserved | `al-object-id-assignment` |
