@@ -30,8 +30,9 @@ the caller names a base or files. Read the spec that belongs to the change.
 
 ### 2. Facts first
 
-- `/done` facts: run the `definition-of-done` skill (it is read-only). Every red line is a
-  `blocking` finding with that line as its source.
+- `/done` facts: run the `definition-of-done` skill. Every red line is a `blocking` finding
+  with that line as its source. For D8 you never publish: use a test run from this session,
+  or report D8 as "not run by the reviewer" under `Not checked`.
 - Requirement check: every acceptance criterion in the spec, met / partly / not met, with
   the file and line that implements it.
 
@@ -84,7 +85,7 @@ F3 - nit - opinion - ...
 
 Requirements: AC1 met (file:line), AC2 met, AC3 partly (...)
 BCQuality: al-code-review run, <n> articles checked
-Not checked: <sources that were unavailable>; tests were read, not run
+Not checked: <sources that were unavailable>
 ```
 
 Findings ranked `blocking` > `should-fix` > `nit`. The recommendation is one word: `approve`

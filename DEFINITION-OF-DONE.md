@@ -13,19 +13,21 @@ word: **done** or **not done**.
 | D5 | The spec exists, is `implemented` and has no open questions. | the spec's frontmatter and `## Open questions` |
 | D6 | New business logic has tests, one per acceptance criterion. | a changed `Subtype = Test` codeunit in `test/` that contains every test named in the spec's `## Tests` |
 | D7 | Every applicable company rule in `rules/` passes. | the `company-rules` skill: PASS / FAIL / N/A per rule file, with `file:line` |
+| D8 | The tests ran on the sandbox and passed, after the last code change. | a test run (`runTests`, `al_run_tests` or `al runtests`) of the spec's test codeunit in this session, after publishing: every test from the spec's `## Tests` ran, all passed |
 
-## What this proves, and what it does not (yet)
-
-Be honest about what "done" means here:
+## What this proves
 
 | | Proven by |
 |---|---|
 | It **compiles**, app and tests, with zero errors | D1 |
 | IDs, UI text, scope, spec, the existence of tests and the company rules are **checked** | D2-D7 |
+| It **works**: the tests ran on the sandbox and passed | D8 |
 | A reviewer **read** it | the `al-reviewer` agent, after `/done` |
-| **Not proven yet: the tests ran and passed** | nothing. D6 proves the tests exist and compile. No line here publishes them to a sandbox or runs them, so a test that would fail still passes this DoD. |
 
-`/done` prints that last line on every run, so nobody mistakes "compiles" for "works".
+The tests proving something is the `al-sdd` agent's job: its loop (spec -> test -> RED (the
+test fails) -> business logic -> GREEN (the test passes) -> mutation (break the logic on
+purpose) -> RED (the test catches it) -> GREEN (revert, the test passes again)) shows that
+the tests fail when the logic is wrong. D8 only proves they pass now.
 
 `<base>` is where the work started: `git merge-base HEAD main` unless you say otherwise.
 

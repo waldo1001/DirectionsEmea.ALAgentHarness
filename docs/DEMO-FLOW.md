@@ -236,7 +236,8 @@ Prove it: ask the room for a rule THEY enforce. Write `rules/<their-rule>.md` li
 .good/.bad sample -> re-run `/done` -> the new check appears.
 
 ### Step 10 - `step-10-sdd` : spec-driven development, tests that actually run (waldo, 10 min)
-`.claude/agents/al-sdd.md`, a session agent (`claude --agent al-sdd`), with the full loop:
+`.claude/agents/al-sdd.md`, a session agent (`/sdd <spec>` in your session, or
+`claude --agent al-sdd`), with the full loop:
 **spec -> test -> RED (the test fails) -> business logic -> GREEN (the test passes) ->
 mutation (break the logic on purpose) -> RED (the test catches it) -> GREEN (revert, the
 test passes again).** Tests actually run: in VS Code (Copilot) through the built-in
@@ -249,8 +250,8 @@ opens it with the GitHub CLI (no DevOps MCP needed; ours talks to Azure DevOps +
 talks to whatever), and a `chat-export` skill so your devlead sees which skills never
 triggered. All on `main`, all optional, all replaceable.
 Message: the harness is the place where your shop's process becomes executable.
-Replay: `/al-sdd` on the approved spec against a real BC 29 sandbox: the loop runs, tests go RED
-and GREEN for real. Without a sandbox in `.vscode/launch.json` the agent stops at its gate and
+Replay: `/sdd specs/preferred-carrier.md` against a real BC 29 sandbox: the loop runs, tests go
+RED and GREEN for real, and it ends with the `/done` verdict. Without a sandbox in `.vscode/launch.json` the agent stops at its gate and
 refuses to fake GREEN - that is the fallback story.
 
 ### Step 11 - `step-11-plugin` : the harness as a plugin (to divide, 6 min)
@@ -269,8 +270,8 @@ Prove it: an empty AL repo with only the plugin loaded -> "create a table" -> th
 and Ninja do the work.
 
 ### Run 99 - `run-99-with-harness` (7 min)
-Same task text, same main model (the al-coder subagent runs on the cheaper model). Side by side
-with run 00: questions asked, IDs reserved, a
+Same task text, same model, the full flow: the task -> the spec questions -> approval -> `/sdd` on
+the sandbox -> the `/done` verdict. Side by side with run 00: questions asked, IDs reserved, a
 build, company rules, an honest `/done` verdict. Mark which wins came from Part A (everyone gets these), Part B, and Part C (yours
 differ).
 

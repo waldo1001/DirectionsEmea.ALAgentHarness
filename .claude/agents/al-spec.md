@@ -67,7 +67,10 @@ decisions with their source (asked / decided), testable acceptance criteria, eve
 with `<Ninja>`, every event as a symbol path, every user-facing text as a Label.
 **Acceptance criteria and tests map one-to-one**: every AC has exactly one test, every test
 covers exactly one AC, same number (`AC1` -> test 1). A criterion you can not write a test
-for is not testable yet: rewrite it. Leave `## Reserved IDs` empty. `status: draft`.
+for is not testable yet: rewrite it. The tests run in the cloud test runner on a SaaS sandbox:
+prove behaviour with codeunit-level tests, and page placement with the build and the symbols
+(a `## Decisions` line), not with a TestPage test - TestPage tests can crash there. Leave
+`## Reserved IDs` empty. `status: draft`.
 
 Add the spec to the index in `specs/README.md` (one row: file, title, status, depends-on),
 and keep its status there in sync whenever you change it.
@@ -91,5 +94,5 @@ once and report: "al-spec is interactive: run `/spec <task>` in your own session
 Spec: specs/<feature>.md   status: draft | approved
 Objects: <n> new, <n> extended   Events: <list>
 Decisions: <n> asked, <n> decided   Open questions: <n>
-Next: approved -> implementation (the al-coder agent, when the repo has it). Not by al-spec.
+Next: approved -> `/sdd specs/<feature>.md` (test-first on the sandbox) or the al-coder agent. Not by al-spec.
 ```

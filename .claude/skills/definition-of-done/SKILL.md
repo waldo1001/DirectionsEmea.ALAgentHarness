@@ -1,6 +1,6 @@
 ---
 name: definition-of-done
-description: 'Check a change against DEFINITION-OF-DONE.md mechanically: every line gets a command or tool call as evidence, then one word, done or not done. Use when: /done, "is it done?", "can I open a PR?", before handing work to review, after the al-coder agent finishes. Read-only: reports, never fixes.'
+description: 'Check a change against DEFINITION-OF-DONE.md mechanically: every line gets a command or tool call as evidence, then one word, done or not done. Use when: /done, "is it done?", "can I open a PR?", before handing work to review, after the al-coder agent finishes. Never fixes: reports. D8 publishes to the sandbox and runs the tests, nothing else changes.'
 ---
 
 # Definition of Done
@@ -72,7 +72,22 @@ Follow the `company-rules` skill in checking mode on the changed AL. Every rule 
 `rules/` gets its own line: PASS, FAIL or N/A. Any FAIL makes D7 red. A rule added a minute
 ago shows up here without any other change.
 
-### 8. Report
+### 8. D8 - tests ran and passed
+
+1. Find the spec's test codeunit (D6) and its ID.
+2. A test run of that codeunit **in this session, after the last change to a `.al` file**
+   (for example the final GREEN of the `al-sdd` agent) counts: quote its result.
+3. Otherwise run it now: build (D1 already did), publish `app/` then `test/` to the sandbox
+   in `.vscode/launch.json` (`al_publish`), then run the codeunit with the first runner the
+   session exposes: the built-in `runTests` tool (VS Code), `al_run_tests` (AL MCP server),
+   or `al runtests <id> --project test --environmentname <name> --environmenttype Sandbox`.
+4. Green = every test named in the spec's `## Tests` ran and passed. A test that did not run
+   is red, not skipped.
+
+No sandbox configured or no runner: D8 is red with the reason. Never mark it green on a
+build alone.
+
+### 9. Report
 
 ```
 Definition of Done - specs/<feature>.md   base <short sha>   files <n>
@@ -85,18 +100,18 @@ Definition of Done - specs/<feature>.md   base <short sha>   files <n>
   [x] D7 company rules        5 rules: 4 PASS, 1 N/A
          PASS tableextension-pte-suffix   DIRCustomer.TableExt.al:5
          ...
-  [-] not proven yet          tests ran and passed (no line in this DoD runs them)
+  [x] D8 tests ran            3 of 3 passed, al_run_tests on codeunit 80100 after publish
 Verdict: NOT DONE (1 red: D3)
 ```
 
 Every line carries its evidence. The verdict is one word, **DONE** or **NOT DONE**, and lists
-the red lines. Nothing is "mostly done". Always print the `not proven yet` line from
-`DEFINITION-OF-DONE.md`: DONE means compiled and checked, not that the tests ran.
+the red lines. Nothing is "mostly done".
 
 ## Never
 
 - Never mark a line green without having run its check in this session.
 - Never fix while checking. Report, then the developer decides who fixes.
+- Never report a test result you did not get from a runner in this session.
 
 ## Related
 

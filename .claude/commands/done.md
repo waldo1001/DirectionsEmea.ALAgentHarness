@@ -1,5 +1,5 @@
 ---
-description: "Check the current change against DEFINITION-OF-DONE.md: evidence per line, then one word - DONE or NOT DONE. Read-only."
+description: "Check the current change against DEFINITION-OF-DONE.md: evidence per line, then one word - DONE or NOT DONE. Never fixes; D8 publishes to the sandbox and runs the tests."
 argument-hint: "[spec path] [base ref]"
 ---
 

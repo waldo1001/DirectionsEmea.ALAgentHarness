@@ -52,5 +52,8 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 | implement an approved spec | "implement the spec" - the `al-coder` agent, as a subagent (no command) |
 | check it is done | `/done` - every DoD line with evidence, then DONE or NOT DONE |
 | review it | the `al-reviewer` agent - read-only, findings first, applies BCQuality |
+| implement test-first on a sandbox | `/sdd <spec>` (or `claude --agent al-sdd`), in your own session only: spec -> test -> RED (the test fails) -> business logic -> GREEN (the test passes) -> mutation (break the logic) -> RED (the test catches it) -> GREEN (revert, passes again) |
+| open the PR | `/pr` - standard description from the spec and the `/done` report, opened with the GitHub CLI |
+| capture a session where the harness failed | the `chat-export` skill, only when the developer asks |
 | build and fix until green, without filling this conversation with diagnostics | the `al-build-fixer` agent (subagent) |
 | a simple BC/AL knowledge question (pattern, event, property) | the `al-lookup` agent (subagent on the cheaper haiku model; pass the developer's question as asked) |
