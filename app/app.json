@@ -1,0 +1,34 @@
+{
+  "id": "04aa6e2c-f125-4443-8f29-befe8bd4c6d8",
+  "name": "Directions Demo",
+  "publisher": "iFacto Business Solutions NV",
+  "version": "1.0.0.0",
+  "brief": "Sample per-tenant extension for the AL agent harness demo.",
+  "description": "A tiny PTE used at Directions EMEA 2026 to show what an agent harness changes.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "29.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "18.0",
+  "features": [
+    "NoImplicitWith",
+    "TranslationFile"
+  ],
+  "target": "Cloud"
+}

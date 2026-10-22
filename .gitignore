@@ -1,0 +1,16 @@
+# AL build output and caches
+.alpackages/
+.alcache/
+.snapshots/
+*.app
+rad.json
+*.g.xlf
+TestResults*.xml
+
+# Local, per-developer agent settings
+.claude/settings.local.json
+CLAUDE.local.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

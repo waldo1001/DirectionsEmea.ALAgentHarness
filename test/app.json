@@ -1,0 +1,52 @@
+{
+  "id": "8a698c01-0e12-4d98-a94e-cbe5b6112a7b",
+  "name": "Directions Demo Tests",
+  "publisher": "iFacto Business Solutions NV",
+  "version": "1.0.0.0",
+  "brief": "Tests for the Directions Demo app.",
+  "description": "Test app for the Directions Demo per-tenant extension.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "04aa6e2c-f125-4443-8f29-befe8bd4c6d8",
+      "name": "Directions Demo",
+      "publisher": "iFacto Business Solutions NV",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "d852d5d2-a39d-4179-baeb-f99a19e32510",
+      "name": "Application Test Library",
+      "publisher": "Microsoft",
+      "version": "29.0.0.0"
+    },
+    {
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "name": "Test Runner",
+      "publisher": "Microsoft",
+      "version": "29.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "29.0.0.0",
+  "idRanges": [
+    {
+      "from": 80100,
+      "to": 80149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "18.0",
+  "features": [
+    "NoImplicitWith"
+  ],
+  "target": "Cloud"
+}
