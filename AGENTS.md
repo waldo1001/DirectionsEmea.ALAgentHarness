@@ -37,3 +37,10 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 | When | Skill |
 |------|-------|
 | a new object, field or enum value; deleting one you reserved | `al-object-id-assignment` |
+| after changing any `.al` file or `app.json`; before saying done | `al-build-validation` |
+
+## Agents
+
+| Step | How |
+|------|-----|
+| build and fix until green, without filling this conversation with diagnostics | the `al-build-fixer` agent (subagent) |
