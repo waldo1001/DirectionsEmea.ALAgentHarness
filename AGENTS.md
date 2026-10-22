@@ -38,9 +38,11 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 |------|-------|
 | a new object, field or enum value; deleting one you reserved | `al-object-id-assignment` |
 | after changing any `.al` file or `app.json`; before saying done | `al-build-validation` |
+| a "how should I" question about AL/BC; checking an event, property or pattern | `al-knowledge` |
 
 ## Agents
 
 | Step | How |
 |------|-----|
 | build and fix until green, without filling this conversation with diagnostics | the `al-build-fixer` agent (subagent) |
+| a simple BC/AL knowledge question (pattern, event, property) | the `al-lookup` agent (subagent on the cheaper haiku model; pass the developer's question as asked) |

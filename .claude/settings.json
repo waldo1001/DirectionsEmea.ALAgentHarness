@@ -31,5 +31,16 @@
         ]
       }
     ]
+  },
+  "extraKnownMarketplaces": {
+    "bc-observatory": {
+      "source": {
+        "source": "github",
+        "repo": "waldo1001/waldo.BCObservatory"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "bc-observatory@bc-observatory": true
   }
 }
