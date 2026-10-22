@@ -13,7 +13,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 ## Look it up, never assume
 
 - **Affix:** `mandatoryAffixes` in `app/AppSourceCop.json`. Every new object name carries it.
-- **Object IDs:** reserved, never picked. Do not read `idRanges` to choose an ID.
+- **Object IDs:** from the `al-object-id-assignment` skill, never picked. Do not read `idRanges`.
 - **BC version:** `application` and `runtime` in `app/app.json`.
 
 ## How we write AL
@@ -31,3 +31,9 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 - Never edit files outside `app/` and `test/` for an AL task.
 - Never rewrite git history: no force push, no rebase or reset of commits others may have.
 - Never report done without a green build.
+
+## Skills (loaded on demand)
+
+| When | Skill |
+|------|-------|
+| a new object, field or enum value | `al-object-id-assignment` |
