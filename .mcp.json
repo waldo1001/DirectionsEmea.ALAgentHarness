@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "al": {
+      "type": "stdio",
+      "command": "al",
+      "args": [
+        "launchmcpserver",
+        "--transport",
+        "stdio",
+        "app",
+        "test"
+      ]
+    }
+  }
+}
