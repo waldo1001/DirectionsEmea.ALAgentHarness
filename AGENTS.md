@@ -8,6 +8,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 
 - `app/` - "Directions Demo", a Business Central per-tenant extension (PTE) in AL.
 - `test/` - its test app. Depends on `app/`.
+- `specs/` - one spec per feature: the contract for the implementation (`specs/README.md`).
 - The base application is Microsoft's. You extend it; you never modify it.
 
 ## Look it up, never assume
@@ -28,7 +29,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 
 - Never invent an object, field or enum-value ID. No guess, no "next free number".
 - Never hardcode user-facing text. A literal in `Error(`, `Message(` or `Confirm(` is blocked.
-- Never edit files outside `app/` and `test/` for an AL task.
+- Never edit files outside `app/`, `test/` and the feature's spec in `specs/` for an AL task.
 - Never rewrite git history: no force push, no rebase or reset of commits others may have.
 - Never report done without a green build.
 
@@ -40,9 +41,10 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 | after changing any `.al` file or `app.json`; before saying done | `al-build-validation` |
 | a "how should I" question about AL/BC; checking an event, property or pattern | `al-knowledge` |
 
-## Agents
+## Agents and commands
 
 | Step | How |
 |------|-----|
+| spec a feature | `/spec <task>` - the `al-spec` agent, interactive, in your own session |
 | build and fix until green, without filling this conversation with diagnostics | the `al-build-fixer` agent (subagent) |
 | a simple BC/AL knowledge question (pattern, event, property) | the `al-lookup` agent (subagent on the cheaper haiku model; pass the developer's question as asked) |
