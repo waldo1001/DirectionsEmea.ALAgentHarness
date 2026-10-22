@@ -62,7 +62,7 @@ it relates to, what happens on the edge cases. Then:
 
 ### 4. Write the spec
 
-Copy `specs/TEMPLATE.md` to `specs/<feature-in-kebab-case>.md` and fill every section:
+Copy `specs/TEMPLATE.md` (none in the project: the plugin's `templates/spec-TEMPLATE.md`) to `specs/<feature-in-kebab-case>.md` and fill every section:
 decisions with their source (asked / decided), testable acceptance criteria, every object
 with `<Ninja>`, every event as a symbol path, every user-facing text as a Label.
 **Acceptance criteria and tests map one-to-one**: every AC has exactly one test, every test

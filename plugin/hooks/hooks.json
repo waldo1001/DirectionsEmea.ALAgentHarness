@@ -1,0 +1,20 @@
+{
+  "description": "AL agent harness: always-on rules at session start, and the guardrail against literal UI text in .al files",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start.mjs\"" }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/no-literal-ui-text.mjs\"" }
+        ]
+      }
+    ]
+  }
+}

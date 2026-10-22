@@ -1,0 +1,20 @@
+{
+  "name": "al-agent-harness",
+  "version": "1.1.0",
+  "description": "An agent harness for Business Central AL: object IDs reserved with Ninja, a build-diagnose-fix loop, sourced BC knowledge, specs, a coder, a definition of done a machine can check, company rules, test-first SDD and a guardrail hook against hardcoded UI text. Built live at Directions EMEA 2026.",
+  "author": {
+    "name": "waldo & AJ"
+  },
+  "repository": "https://github.com/waldo1001/DirectionsEmea.ALAgentHarness",
+  "license": "MIT",
+  "keywords": [
+    "business-central",
+    "al",
+    "agents",
+    "harness",
+    "skills"
+  ],
+  "dependencies": [
+    "bc-observatory@bc-observatory"
+  ]
+}

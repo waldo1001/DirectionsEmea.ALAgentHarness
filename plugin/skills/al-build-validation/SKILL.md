@@ -34,7 +34,9 @@ Use what the session exposes; list your tools, do not assume.
 | GitHub Copilot in VS Code (AL extension tools) | `al_build` | `al_getdiagnostics` |
 | No MCP tool (fallback) | `al compile` CLI, see below | the compiler output |
 
-No tool and no `al` CLI? Hard stop, below.
+No tool and no `al` CLI? Hard stop, below. The plugin starts the AL MCP server without a
+project: when a tool answers "no projects are loaded", call `al_addproject` for `app/` and
+`test/` (each folder with an `app.json`) and try again.
 
 ### 2. Build in dependency order
 

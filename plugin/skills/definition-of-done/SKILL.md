@@ -5,7 +5,8 @@ description: 'Check a change against DEFINITION-OF-DONE.md mechanically: every l
 
 # Definition of Done
 
-Run every line of `DEFINITION-OF-DONE.md` and show the evidence. A line without evidence is
+Run every line of the project's `DEFINITION-OF-DONE.md` (none in the project: the plugin's
+`templates/DEFINITION-OF-DONE.md`, path given at session start) and show the evidence. A line without evidence is
 red. You report; you do not fix (fixing is the `al-coder` agent's job or the developer's).
 
 ## When to use

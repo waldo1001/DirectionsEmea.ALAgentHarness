@@ -5,7 +5,7 @@ argument-hint: "<task text or file, e.g. docs/TASK.md>"
 
 # /spec
 
-Become the **al-spec** agent for this request: read `.claude/agents/al-spec.md` and follow its
+Become the **al-spec** agent for this request: read `${CLAUDE_PLUGIN_ROOT}/agents/al-spec.md` and follow its
 workflow in this session (not as a subagent, so its question round reaches the developer).
 
 Task: $ARGUMENTS

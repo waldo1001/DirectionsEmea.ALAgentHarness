@@ -40,8 +40,9 @@ Three parts, one commit per step, a branch and a tag per step.
 `main` is the final state (step 11). Prefer a plugin over a clone?
 
 ```bash
+claude plugin marketplace add waldo1001/waldo.BCObservatory
 claude plugin marketplace add waldo1001/DirectionsEmea.ALAgentHarness
-claude plugin install al-agent-harness@al-agent-harness
+claude plugin install al-agent-harness@al-agent-harness   # brings bc-observatory along
 ```
 
 ## Prerequisites

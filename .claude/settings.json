@@ -19,28 +19,22 @@
       "mcp__al__al_getnextobjectid"
     ]
   },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Write|Edit|MultiEdit|Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/no-literal-ui-text.mjs\""
-          }
-        ]
-      }
-    ]
-  },
   "extraKnownMarketplaces": {
     "bc-observatory": {
       "source": {
         "source": "github",
         "repo": "waldo1001/waldo.BCObservatory"
       }
+    },
+    "al-agent-harness": {
+      "source": {
+        "source": "github",
+        "repo": "waldo1001/DirectionsEmea.ALAgentHarness"
+      }
     }
   },
   "enabledPlugins": {
-    "bc-observatory@bc-observatory": true
+    "bc-observatory@bc-observatory": true,
+    "al-agent-harness@al-agent-harness": true
   }
 }

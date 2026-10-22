@@ -1,0 +1,21 @@
+{
+  "name": "al-agent-harness",
+  "owner": {
+    "name": "waldo & AJ",
+    "url": "https://github.com/waldo1001"
+  },
+  "plugins": [
+    {
+      "name": "al-agent-harness",
+      "source": "./plugin",
+      "description": "The AL agent harness from Directions EMEA 2026: skills, agents, commands, hooks and MCP servers for Business Central AL development.",
+      "version": "1.1.0"
+    }
+  ],
+  "metadata": {
+    "description": "The AL agent harness from Directions EMEA 2026, as a Claude Code plugin."
+  },
+  "allowCrossMarketplaceDependenciesOn": [
+    "bc-observatory"
+  ]
+}

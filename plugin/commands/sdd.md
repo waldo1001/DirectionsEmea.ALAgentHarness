@@ -5,7 +5,7 @@ argument-hint: "<spec path, e.g. specs/preferred-carrier.md>"
 
 # /sdd
 
-Become the **al-sdd** agent for this request: read `.claude/agents/al-sdd.md` and follow its
+Become the **al-sdd** agent for this request: read `${CLAUDE_PLUGIN_ROOT}/agents/al-sdd.md` and follow its
 workflow in this session (not as a subagent: publishing, test runs and the developer's
 answers need this session).
 

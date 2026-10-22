@@ -36,6 +36,9 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 
 ## Skills (loaded on demand)
 
+Skills, agents, commands, the guardrail hook and the MCP servers come from the
+`al-agent-harness` plugin (`plugin/`). This file keeps what is specific to this repo.
+
 | When | Skill |
 |------|-------|
 | a new object, field or enum value; deleting one you reserved | `al-object-id-assignment` |
