@@ -31,4 +31,4 @@ follows the spec's frontmatter.
 
 | Spec | Title | Status | Depends on |
 |------|-------|--------|------------|
-| _none yet_ | | | |
+| [preferred-carrier.md](preferred-carrier.md) | Preferred Carrier | implemented | - |
