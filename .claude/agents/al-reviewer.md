@@ -49,6 +49,9 @@ Read the full after-state of every changed object, then check:
   Would they pass against the real base app? Check the preconditions of what they call (a
   release needs a document with lines; a posting needs setup) before you mark an AC met.
 
+Then the `company-rules` skill in checking mode: every FAIL is a finding with the rule file as
+its source, `should-fix` unless the rule says it blocks.
+
 ### 4. BCQuality (mandatory)
 
 Apply BCQuality explicitly; it is a required pass, not a bonus:
@@ -64,7 +67,8 @@ Apply BCQuality explicitly; it is a required pass, not a bonus:
    gate.
 
 Not installed: say so under `Not checked`, do not answer from memory what it would have
-said.
+said. Company rules come on top of BCQuality: where they disagree, the company rule wins and
+the BCQuality finding is dropped.
 
 ### 5. Report
 

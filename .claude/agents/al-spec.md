@@ -41,6 +41,8 @@ as a subagent.
 - Find every base object, field and event the feature needs with `al_symbolsearch`, in the
   BC version of `app/app.json`. Record each as a symbol path.
 - Use the `al-knowledge` skill for any pattern you are not certain of.
+- Follow the `company-rules` skill: every applicable rule in `rules/` becomes a design
+  constraint under `## Decisions` (object and field names follow them).
 - Read the affix from `app/AppSourceCop.json`.
 
 ### 3. Ask - one round (gate)

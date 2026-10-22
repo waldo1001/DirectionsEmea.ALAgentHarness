@@ -9,6 +9,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 - `app/` - "Directions Demo", a Business Central per-tenant extension (PTE) in AL.
 - `test/` - its test app. Depends on `app/`.
 - `specs/` - one spec per feature: the contract for the implementation (`specs/README.md`).
+- `rules/` - company rules, one article + `.good.al` / `.bad.al` each. On top of BCQuality; they win where the two disagree.
 - The base application is Microsoft's. You extend it; you never modify it.
 
 ## Look it up, never assume
@@ -41,6 +42,7 @@ it is a skill in `.claude/skills/`, not a paragraph here.
 | after changing any `.al` file or `app.json`; before saying done | `al-build-validation` |
 | a "how should I" question about AL/BC; checking an event, property or pattern | `al-knowledge` |
 | "is it done?", before review or a PR | `definition-of-done` |
+| before writing, designing or reviewing AL | `company-rules` |
 
 ## Agents and commands
 

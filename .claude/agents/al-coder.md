@@ -55,6 +55,8 @@ references an issue: read it. Otherwise proceed.
   `.bad.al` samples. Write in the good pattern; never emit the bad one. Record which
   articles you applied in the hand-off: only articles you actually read in this run. BCQuality not installed: say so in the hand-off
   ("not checked against BCQuality"), do not answer from memory.
+- **Company rules on top.** Follow the `company-rules` skill and apply every applicable rule
+  in `rules/` as you write. They come on top of BCQuality and win where the two disagree.
 
 ### 3. Reserve IDs
 

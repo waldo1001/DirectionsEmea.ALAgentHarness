@@ -12,6 +12,7 @@ word: **done** or **not done**.
 | D4 | Nothing changed outside `app/`, `test/` and the feature's spec (plus its row in the `specs/README.md` index). | `git diff --name-only <base>` + untracked files |
 | D5 | The spec exists, is `implemented` and has no open questions. | the spec's frontmatter and `## Open questions` |
 | D6 | New business logic has tests, one per acceptance criterion. | a changed `Subtype = Test` codeunit in `test/` that contains every test named in the spec's `## Tests` |
+| D7 | Every applicable company rule in `rules/` passes. | the `company-rules` skill: PASS / FAIL / N/A per rule file, with `file:line` |
 
 ## What this proves, and what it does not (yet)
 
@@ -20,7 +21,7 @@ Be honest about what "done" means here:
 | | Proven by |
 |---|---|
 | It **compiles**, app and tests, with zero errors | D1 |
-| IDs, UI text, scope, spec and the existence of tests are **checked** | D2-D6 |
+| IDs, UI text, scope, spec, the existence of tests and the company rules are **checked** | D2-D7 |
 | A reviewer **read** it | the `al-reviewer` agent, after `/done` |
 | **Not proven yet: the tests ran and passed** | nothing. D6 proves the tests exist and compile. No line here publishes them to a sandbox or runs them, so a test that would fail still passes this DoD. |
 

@@ -66,7 +66,13 @@ one. Then: a changed file in `test/` with `Subtype = Test` and `[Test]` methods,
 name from the spec's `## Tests` table appears as a procedure there. Not applicable = green,
 with the reason.
 
-### 7. Report
+### 7. D7 - company rules
+
+Follow the `company-rules` skill in checking mode on the changed AL. Every rule file in
+`rules/` gets its own line: PASS, FAIL or N/A. Any FAIL makes D7 red. A rule added a minute
+ago shows up here without any other change.
+
+### 8. Report
 
 ```
 Definition of Done - specs/<feature>.md   base <short sha>   files <n>
@@ -76,6 +82,9 @@ Definition of Done - specs/<feature>.md   base <short sha>   files <n>
   [x] D4 scope                9 files, all under app/ test/ specs/preferred-carrier.md
   [x] D5 spec                 implemented, 0 open questions
   [x] D6 tests                DIRCarrierTests.Codeunit.al: 3 of 3 spec tests present
+  [x] D7 company rules        5 rules: 4 PASS, 1 N/A
+         PASS tableextension-pte-suffix   DIRCustomer.TableExt.al:5
+         ...
   [-] not proven yet          tests ran and passed (no line in this DoD runs them)
 Verdict: NOT DONE (1 red: D3)
 ```
@@ -93,4 +102,5 @@ the red lines. Nothing is "mostly done". Always print the `not proven yet` line 
 
 - `al-build-validation` - D1.
 - `al-object-id-assignment` - fills the `## Reserved IDs` table D2 compares against.
+- `company-rules` - D7.
 - `al-reviewer` agent - the judgment calls this checklist deliberately leaves out.
